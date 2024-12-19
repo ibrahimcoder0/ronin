@@ -43,5 +43,65 @@ function sbportfolio_theme_support(){
     add_theme_support('post-formats', array('audio', 'video', 'quote', 'link', 'gallery'));
     add_theme_support('title-tag');
     add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
+
+
+    // Register menu 
+    register_nav_menu('primary_menu', 'Primary Menu');
+
+    function ronin_nav_menu_anchor($attributes){
+        $attributes['class']   = 'nav-link';
+        return $attributes;
+    }
+    add_action( 'nav_menu_link_attributes', 'ronin_nav_menu_anchor');
+
 }
 add_action('after_setup_theme', 'sbportfolio_theme_support');
+
+
+
+//Comment Field Order
+add_filter( 'comment_form_fields', 'mo_comment_fields_custom_order' );
+function mo_comment_fields_custom_order( $fields ) {
+    $comment_field = $fields['comment'];
+    $author_field = $fields['author'];
+    $email_field = $fields['email'];
+    $url_field = $fields['url'];
+    $cookies_field = $fields['cookies'];
+    unset( $fields['comment'] );
+    unset( $fields['author'] );
+    unset( $fields['email'] );
+    unset( $fields['url'] );
+    unset( $fields['cookies'] );
+    // the order of fields is the order below, change it as needed:
+    $fields['author'] = $author_field;
+    $fields['email'] = $email_field;
+    $fields['url'] = $url_field;
+    $fields['comment'] = $comment_field;
+    $fields['cookies'] = $cookies_field;
+    // done ordering, now return the fields:
+    return $fields;
+}
+
+// Modify Comment Field 
+function comment_field($data){
+    return '<div class="form-group"> <p class="comment-form-comment"><textarea class="form-control mb-3" placeholder="Message *" id="comment" name="comment" cols="45" rows="8" maxlength="65525" required=""></textarea></p> </div>';
+}
+add_filter('comment_form_field_comment', 'comment_field');
+
+// Modify Comment Field 
+function author_field($data){
+    return '<div class="comment-form-author"> <input class="form-control mb-3" id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required="" placeholder="Enter Name"></div>';
+}
+add_filter('comment_form_field_author', 'author_field');
+
+// Modify Comment Field 
+function email_field($data){
+    return '<div class="comment-form-author"> <input class="form-control mb-3" id="email" name="emial" type="email" value="" size="30" maxlength="245" autocomplete="name" required="" placeholder="Enter Email Address"></div>';
+}
+add_filter('comment_form_field_email', 'email_field');
+
+// Modify Comment Field 
+function url_field($data){
+    return '<div class="comment-form-author"> <input class="form-control mb-3" id="subject" name="subject" type="subject" value="" size="30" maxlength="245" autocomplete="name" required="" placeholder="Enter Subject"></div>';
+}
+add_filter('comment_form_field_url', 'url_field');

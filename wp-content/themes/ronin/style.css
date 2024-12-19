@@ -13,3 +13,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: ronin
 Tags: test seo
 */
+.single-post-area .blog_details img{
+    width: 100%;
+}
+/* img{
+    width: 100%;
+} */
