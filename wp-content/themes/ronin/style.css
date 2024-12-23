@@ -22,3 +22,12 @@ Tags: test seo
 .rating-img{
 	width: 90px !important;
 }
+.blog_post img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+.page_link ul li {
+    display: inline-block;
+    padding: 5px 10px;
+}

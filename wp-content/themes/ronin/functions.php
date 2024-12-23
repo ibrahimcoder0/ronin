@@ -1,6 +1,33 @@
 <?php 
-// SBPortfoilo Assets Load 
 
+// Require TGM Activation Plugin File
+require_once 'lib/class-tgm-plugin-activation.php';
+
+// TGM config file
+require_once 'inc/tgm-config.php';
+
+// MJ breadcrumb file
+require_once 'lib/mj-wp-breadcrumb.php';
+
+// Codestar Fromework File
+require_once get_theme_file_path( ) .'/lib/codestar-framework-master/codestar-framework.php';
+
+// require codestar config file
+
+require_once get_theme_file_path( ) .'/inc/cf-config.php';
+
+// require_once get_theme_file_path() .'/lib/codestar-framework/codestar-framework.php';
+// // require codestar config file 
+// require_once get_theme_file_path() .'/inc/cf-config.php';
+// // require custom widgets file 
+// require_once get_theme_file_path() .'/inc/sb-widgets.php';
+// // require advance custom field config file 
+// require_once get_theme_file_path() .'/inc/acf-config.php';
+
+
+
+
+// Ronin Assets Load 
 function sbportfolio_assets_load_function(){
     wp_enqueue_style('bootstrap', get_theme_file_uri(). '/assets/css/bootstrap.css', null, '4.1.3');
     wp_enqueue_style('linericons', get_theme_file_uri(). '/assets/vendors/linericon/style.css', null, '1.0.0');
@@ -30,6 +57,16 @@ function sbportfolio_assets_load_function(){
 
 }
 add_action('wp_enqueue_scripts', 'sbportfolio_assets_load_function');
+
+
+if( ! function_exists( 'your_prefix_enqueue_fa5' ) ) {
+    function your_prefix_enqueue_fa5() {
+      wp_enqueue_style( 'fa5', 'https://use.fontawesome.com/releases/v5.13.0/css/all.css', array(), '5.13.0', 'all' );
+      wp_enqueue_style( 'fa5-v4-shims', 'https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css', array(), '5.13.0', 'all' );
+    }
+    add_action( 'wp_enqueue_scripts', 'your_prefix_enqueue_fa5' );
+  }
+  
 
 // theme support 
 function sbportfolio_theme_support(){
@@ -105,3 +142,55 @@ function url_field($data){
     return '<div class="comment-form-author"> <input class="form-control mb-3" id="subject" name="subject" type="subject" value="" size="30" maxlength="245" autocomplete="name" required="" placeholder="Enter Subject"></div>';
 }
 add_filter('comment_form_field_url', 'url_field');
+
+
+
+// widget area register 
+function ronin_footer_widget_register(){
+    register_sidebar(array(
+        'id'        => 'footer_1',
+        'name'      => 'Footer 1',
+        'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'before_widget' => '<div id="%1$s" class="f_widget ab_widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<div class="f_title"><h3>',
+		'after_title'   => '</h3></div>',
+    ));
+    register_sidebar(array(
+        'id'        => 'footer_2',
+        'name'      => 'Footer 2',
+        'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'before_widget' => '<div id="%1$s" class="f_widget ab_widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<div class="f_title"><h3>',
+		'after_title'   => '</h3></div>',
+    ));
+    register_sidebar(array(
+        'id'        => 'footer_3',
+        'name'      => 'Footer 3',
+        'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'before_widget' => '<div id="%1$s" class="f_widget ab_widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<div class="f_title"><h3>',
+		'after_title'   => '</h3></div>',
+    ));
+
+}
+add_action( 'widgets_init', 'ronin_footer_widget_register' );
+
+
+
+
+
+
+function sbcustom_css(){
+    echo '
+    <style>
+    #acf-group_67667814a363c {
+        display: none !important;
+    }
+    </style>';
+}
+add_action('admin_head', 'sbcustom_css');
+
+

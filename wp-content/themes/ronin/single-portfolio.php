@@ -7,11 +7,7 @@
 				<div class="container">
 					<div class="banner_content text-center">
 						<h2>Portfolio Details</h2>
-						<div class="page_link">
-							<a href="index.html">Home</a>
-							<a href="services.html">Portfolio</a>
-							<a href="services.html">Portfolio Details</a>
-						</div>
+						<?php get_template_part('template-parts/common/breadcrumb'); ?>
 						
 					</div>
 				</div>

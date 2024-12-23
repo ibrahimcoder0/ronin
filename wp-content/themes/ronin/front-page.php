@@ -1,4 +1,6 @@
-<?php get_header( );?>
+<?php get_header( );
+$options = get_option( 'ronin_framework' ); // unique id of the framework
+?>
         
         <!--================Home Banner Area =================-->
         <section class="home_banner_area">
@@ -7,15 +9,15 @@
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="home_left_img">
-								<img src="<?php echo get_template_directory_uri(  ); ?>/assets/img/banner/home-left-1.png" alt="">
+								<img src="<?php echo $options['hero_img']; ?>" alt="">
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="banner_content">
-								<h5>This is me</h5>
-								<h2>Travor James</h2>
-								<p>You will begin to realise why this exercise is called the Dickens Pattern (with reference to the ghost showing Scrooge some different futures)</p>
-								<a class="banner_btn" href="#">Discover Now</a>
+								<h5><?php echo $options['hero_subtitle']; ?></h5>
+								<h2><?php echo $options['hero_title']; ?></h2>
+								<p><?php echo $options['hero_content']; ?></p>
+								<a class="banner_btn" href="<?php echo $options['hero_btn_link']; ?>"><?php echo $options['hero_btn_text']; ?></a>
 							</div>
 						</div>
 					</div>
@@ -30,30 +32,22 @@
         		<div class="row welcome_inner">
         			<div class="col-lg-6">
         				<div class="welcome_text">
-        					<h4>About Myself</h4>
-        					<p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</p>
+        					<h4><?php echo $options['home_about_title']; ?></h4>
+        					<p><?php echo $options['home_about_content']?></p>
         					<div class="row">
+								<?php
+									$home_about_box_rep = $options['home_about_box_rep'];
+									// print_r($all_skills);
+									foreach ($home_about_box_rep as $single_rep) :
+								?>
         						<div class="col-md-4">
         							<div class="wel_item">
-        								<i class="lnr lnr-database"></i>
-        								<h4>$2.5M</h4>
-        								<p>Total Donation</p>
+        								<i class="<?php echo $single_rep['home_about_rep_icon']; ?>"></i>
+        								<h4><?php echo $single_rep['home_about_rep_title']; ?></h4>
+        								<p><?php echo $single_rep['home_about_rep_content']; ?></p>
         							</div>
         						</div>
-        						<div class="col-md-4">
-        							<div class="wel_item">
-        								<i class="lnr lnr-book"></i>
-        								<h4>1465</h4>
-        								<p>Total Projects</p>
-        							</div>
-        						</div>
-        						<div class="col-md-4">
-        							<div class="wel_item">
-        								<i class="lnr lnr-users"></i>
-        								<h4>3965</h4>
-        								<p>Total Volunteers</p>
-        							</div>
-        						</div>
+        						<?php endforeach;?>
         					</div>
         				</div>
         			</div>
@@ -61,36 +55,18 @@
         				<div class="tools_expert">
         					<h3>Tools Expertness</h3>
         					<div class="skill_main">
+								<?php
+									$home_about_skill = $options['home_about_skill'];
+									// print_r($all_skills);
+									foreach ($home_about_skill as $single_skill) :
+								?>
 								<div class="skill_item">
-									<h4>After Effects <span class="counter">85</span>%</h4>
+									<h4><?php echo $single_skill['home_about_skill_title']; ?> <span class="counter"><?php echo $single_skill['home_about_skill_number']; ?></span>%</h4>
 									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $single_skill['home_about_skill_number']; ?>" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
 								</div>
-								<div class="skill_item">
-									<h4>Photoshop <span class="counter">90</span>%</h4>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</div>
-								<div class="skill_item">
-									<h4>Illustrator <span class="counter">70</span>%</h4>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</div>
-								<div class="skill_item">
-									<h4>Sublime <span class="counter">95</span>%</h4>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</div>
-								<div class="skill_item">
-									<h4>Sketch <span class="counter">75</span>%</h4>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-								</div>
+								<?php endforeach;?>
 							</div>
         				</div>
         			</div>
@@ -253,7 +229,14 @@
         		</div>
         		<div class="row latest_blog_inner">
 
-					<?php while(have_posts(  )): the_post(  ); ?>
+					<?php
+					 $blog_post = new WP_Query(array(
+						'post_type'			=> 'post',
+						'post_status'		=> 'publish',
+						'posts_per_page'	=> 3,
+						'order'			=> 'DESC',
+					 ));
+					 while($blog_post->have_posts(  )): $blog_post->the_post(  ); ?>
         			<div class="col-lg-4">
         				<div class="l_blog_item">
         					<div class="l_blog_img">
