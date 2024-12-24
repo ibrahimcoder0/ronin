@@ -9,17 +9,7 @@ if (is_singular('post')) {
 }
 ?>
         <!--================Home Banner Area =================-->
-        <section class="banner_area">
-            <div class="banner_inner d-flex align-items-center">
-            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
-				<div class="container">
-					<div class="banner_content text-center">
-						<h2>BLOG DETAILS</h2>
-						<?php get_template_part('template-parts/common/breadcrumb'); ?>
-					</div>
-				</div>
-            </div>
-        </section>
+        <?php get_template_part('template-parts/common/breadcrumb'); ?>
         <!--================End Home Banner Area =================-->
         
         <!--================Blog Area =================-->

@@ -58,7 +58,7 @@ if( class_exists( 'CSF' ) ) {
             'id'    => 'hero_btn_link',
             'type'  => 'text',
             'title' => 'Your BTN Link Here',
-            'default' => 'BTN Link Here',
+            'default' => '#',
           ),
         //
         // Hero Btn Link
@@ -191,6 +191,128 @@ if( class_exists( 'CSF' ) ) {
       )
     ) );
 
+    // Section Title
+    CSF::createSection( $prefix, array(
+      'title'  => 'Section Title',
+      'fields' => array(
+        //
+        // Service Title
+        array(
+          'id'    => 'service_title',
+          'type'  => 'text',
+          'title' => 'Service Title Here',
+          'default' => 'Title Here',
+        ),
+        //
+        // Service content
+        array(
+          'id'    => 'service_content',
+          'type'  => 'textarea',
+          'title' => 'Service Content Here',
+          'default' => 'Contact Here',
+        ),
+
+        //
+        // Portfolio Title
+        array(
+          'id'    => 'portfolio_title',
+          'type'  => 'text',
+          'title' => 'Portfolio Title Here',
+          'default' => 'Title Here',
+        ),
+        //
+        // Portfolio content
+        array(
+          'id'    => 'portfolio_content',
+          'type'  => 'textarea',
+          'title' => 'Portfolio Content Here',
+          'default' => 'Contact Here',
+        ),
+
+        //
+        // Testimonial Title
+        array(
+          'id'    => 'testimonail_title',
+          'type'  => 'text',
+          'title' => 'Testimonail Title Here',
+          'default' => 'Title Here',
+        ),
+        //
+        // Testimonail content
+        array(
+          'id'    => 'testimonail_content',
+          'type'  => 'textarea',
+          'title' => 'Testimonail Content Here',
+          'default' => 'Contact Here',
+        ),
+
+        //
+        // Blog Title
+        array(
+          'id'    => 'blog_title',
+          'type'  => 'text',
+          'title' => 'Blog Title Here',
+          'default' => 'Title Here',
+        ),
+        //
+        // Blog content
+        array(
+          'id'    => 'blog_content',
+          'type'  => 'textarea',
+          'title' => 'Blog Content Here',
+          'default' => 'Contact Here',
+        ),
+
+          
+      )
+    ) );
+  
+    //
+    // Home Contact Section
+    CSF::createSection( $prefix, array(
+      'title'  => 'Home Contact Section',
+      'fields' => array(
+  
+        // 
+        // Contct box Repeater
+        array(
+            'id'        => 'home_contact_box_rep',
+            'type'      => 'repeater',
+            'title'     => 'Contact Box Rep',
+            'fields'    => array(
+          
+              array(
+                'id'    => 'home_contact_rep_icon',
+                'type'  => 'icon',
+                'title' => 'Icon',
+                'default' => 'fa fa-heart',
+              ),
+              array(
+                'id'    => 'home_contact_rep_title',
+                'type'  => 'text',
+                'title' => 'Title',
+                'default'=> 'Title',
+              ),
+              array(
+                'id'    => 'home_contact_rep_content',
+                'type'  => 'text',
+                'title' => 'Content',
+                'default'=> 'Content',
+              ),
+          
+            ),
+            'default'   => array(
+              array(
+                'home_contact_rep_icon' => 'fa fa-heart',
+                'home_contact_rep_title' => 'Title',
+                'home_contact_rep_content' => 'Content',
+              ),
+            )
+          ),
+
+      )
+    ) );
+
 
         // Create a section
         CSF::createSection( $prefix, array(
@@ -212,26 +334,28 @@ if( class_exists( 'CSF' ) ) {
                 'output' => array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' )
             ),
             // Output for multiple element
+          
+            
+            
             array(
-              'id'                              => 'opt-background-2',
-              'type'                            => 'background',
-              'title'                           => 'Background',
-              'background_gradient'             => true,
-              'background_origin'               => false,
-              'background_clip'                 => false,
-              'background_blend_mode'           => false,
-              'default'                         => array(
-                'background-color'              => '#111',
-                'background-gradient-color'     => '#555',
-                'background-gradient-direction' => false,
-                'background-size'               => false,
-                'background-repeat'             => false,
-                'background_image'              => false,
-                'background_position'              => false,
-              )
+              'id'      => 'opt-typography-3',
+              'type'    => 'typography',
+              'title'   => 'Typography',
+              'output'  => 'body p',
+              'default' => array(
+                'color'          => '#ffbc00',
+                'font-family'    => 'Barlow',
+                'font-size'      => '16',
+                'line-height'    => '20',
+                'letter-spacing' => '-1',
+                'text-align'     => 'center',
+                'text-transform' => 'uppercase',
+                'subset'         => 'latin-ext',
+                'type'           => 'google',
+                'unit'           => 'px',
+              ),
             ),
             
-  
 
     
             )

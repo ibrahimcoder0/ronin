@@ -1,60 +1,35 @@
 <?php get_header();?>
         
         <!--================Home Banner Area =================-->
-        <section class="home_banner_area blog_banner">
-            <div class="banner_inner d-flex align-items-center">
-            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
-				<div class="container">
-					<div class="blog_b_text text-center">
-						<h2>Dude You’re Getting <br /> a Telescope</h2>
-						<p>There is a moment in the life of any aspiring astronomer that it is time to buy that first</p>
-						<a class="white_bg_btn" href="#">View More</a>
-					</div>
-				</div>
-            </div>
-        </section>
+        <?php get_template_part('template-parts/common/breadcrumb'); ?>
         <!--================End Home Banner Area =================-->
         
         <!--================Blog Categorie Area =================-->
         <section class="blog_categorie_area">
             <div class="container">
                 <div class="row">
+                    <?php
+                    $all_category = get_categories(array(
+                        'taxonomoy'     => 'category',
+                        'orderby'       => 'id',
+                        'order'         => 'DESC',
+                        'number'        => 3
+                    ));
+                    foreach($all_category as $category):
+                    ?>
                     <div class="col-lg-4">
                         <div class="categories_post">
-                            <img src="img/blog/cat-post/cat-post-3.jpg" alt="post">
+                            <img src="<?php $attachment_id = get_term_meta( $category -> term_id, 'category_thumb', true ); echo wp_get_attachment_image_url($attachment_id, 'large'); ?>">
                             <div class="categories_details">
                                 <div class="categories_text">
-                                    <a href="blog-details.html"><h5>Social Life</h5></a>
+                                    <a href="<?php echo get_category_link( $category ); ?>"><h5><?php echo $category -> name; ?></h5></a>
                                     <div class="border_line"></div>
-                                    <p>Enjoy your social life together</p>
+                                    <p><?php echo $category -> description; ?></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="categories_post">
-                            <img src="img/blog/cat-post/cat-post-2.jpg" alt="post">
-                            <div class="categories_details">
-                                <div class="categories_text">
-                                    <a href="blog-details.html"><h5>Politics</h5></a>
-                                    <div class="border_line"></div>
-                                    <p>Be a part of politics</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="categories_post">
-                            <img src="img/blog/cat-post/cat-post-1.jpg" alt="post">
-                            <div class="categories_details">
-                                <div class="categories_text">
-                                    <a href="blog-details.html"><h5>Food</h5></a>
-                                    <div class="border_line"></div>
-                                    <p>Let the food be finished</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach;?>
                 </div>
             </div>
         </section>

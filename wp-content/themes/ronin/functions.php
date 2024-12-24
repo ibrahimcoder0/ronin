@@ -13,18 +13,13 @@ require_once 'lib/mj-wp-breadcrumb.php';
 require_once get_theme_file_path( ) .'/lib/codestar-framework-master/codestar-framework.php';
 
 // require codestar config file
-
 require_once get_theme_file_path( ) .'/inc/cf-config.php';
 
-// require_once get_theme_file_path() .'/lib/codestar-framework/codestar-framework.php';
-// // require codestar config file 
-// require_once get_theme_file_path() .'/inc/cf-config.php';
-// // require custom widgets file 
-// require_once get_theme_file_path() .'/inc/sb-widgets.php';
-// // require advance custom field config file 
-// require_once get_theme_file_path() .'/inc/acf-config.php';
+// require ACF config file
+require_once get_theme_file_path( ) .'/inc/acf-config.php';
 
-
+// require widget socail file
+require_once get_theme_file_path( ) .'/inc/ronin-widget-social.php';
 
 
 // Ronin Assets Load 
