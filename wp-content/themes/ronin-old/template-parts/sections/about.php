@@ -47,7 +47,8 @@ $options = get_option( 'ronin_framework' ); // unique id of the framework
                         ?>
                         <div class="skill_item">
 
-                            <h4><?php echo $single_skill['home_about_skill_title']; ?> <span class="counter"><?php echo $single_skill['home_about_skill_number']; ?></span>%</h4>
+                            <h4><?php echo $single_skill['home_about_skill_title']; ?> 
+                            <span class="counter"><?php echo $single_skill['home_about_skill_number']; ?></span>%</h4>
                             
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $single_skill['home_about_skill_number']; ?>" aria-valuemin="0" aria-valuemax="100"></div>

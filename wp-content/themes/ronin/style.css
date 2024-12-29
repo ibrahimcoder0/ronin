@@ -1,36 +1,16 @@
 /*
 Theme Name: Ronin
-Theme URI: http://ibrahimcoder.me/
-Author: Ibrahim Coder
+Theme URI: http://ibrahimcoder.me/theme/ronin/
+Author: Ibrahim_Coder
 Author URI: http://ibrahimcoder.me/
-Description: Ronin Theme is creat by Ibrahim Coder
-Requires at least: 6.7
-Tested up to: 6.7
-Requires PHP: 7.2
-Version: 1.0
+Description: This is Just Theme Markup using any theme this Markup
+Version: 1.0.0
+Requires at least: 5.0
+Tested up to: 5.4
+Requires PHP: 7.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: ronin
-Tags: test seo
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
 */
-.single-post-area .blog_details img{
-    width: 100%;
-}
-/* img{
-    width: 100%;
-} */
-.rating-img{
-	width: 90px !important;
-}
-.blog_post img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-}
-.page_link ul li {
-    display: inline-block;
-    padding: 5px 10px;
-}
-.page_link ul {
-    padding: 0;
-}
