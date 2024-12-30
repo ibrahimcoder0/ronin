@@ -1,9 +1,14 @@
 <?php
+/**
+ * File Calling
+ */
+
+ require_once 'inc/lib/mj-wp-breadcrumb.php'; 
+
 
 /**
  * All CSS And JS File Calling
  */
-
  function ronin_scripts_file(){
     wp_enqueue_style( 'bootstrap', get_theme_file_uri( ). '/assets/css/bootstrap.css', null, '4.3.1' );
     wp_enqueue_style( 'font-awesome-min', get_theme_file_uri(  ). '/assets/css/font-awesome.min.css', null, '4.5.0' );
@@ -84,6 +89,20 @@ add_action('admin_head', 'sbcustom_css');
 
 // Footer widget Register
 function ronin_footer_widget(){
+
+    /**
+     * blog sidebar
+     */
+    // register_sidebar( [
+    //     'name'          => esc_html__( 'Blog Sidebar', 'ronin' ),
+    //     'id'            => 'blog-sidebar',
+    //     'description' => 'Put widgets for left footer area',
+    //     'before_widget' => '<div id="%1$s" class="single_sidebar_widget popular_post_widget %2$s"><div class="media post_item">',
+	// 	'after_widget'  => '</div></div>',
+	// 	'before_title'  => '<h3 class="widget_title">',
+	// 	'after_title'   => '</h3>',
+    // ] );
+
     // Footer 1
     register_sidebar( array(
 		'name' => 'Footer 1',
@@ -116,4 +135,76 @@ function ronin_footer_widget(){
 	));
 }
 add_action( 'widgets_init', 'ronin_footer_widget');
+
+// Comments field reorganized 
+//Comment Field Order
+add_filter( 'comment_form_fields', 'mo_comment_fields_custom_order' );
+function mo_comment_fields_custom_order( $fields ) {
+    $comment_field = $fields['comment'];
+    $author_field = $fields['author'];
+    $email_field = $fields['email'];
+    $url_field = $fields['url'];
+    $cookies_field = $fields['cookies'];
+    unset( $fields['comment'] );
+    unset( $fields['author'] );
+    unset( $fields['email'] );
+    unset( $fields['url'] );
+    unset( $fields['cookies'] );
+    // the order of fields is the order below, change it as needed:
+    $fields['author'] = $author_field;
+    $fields['email'] = $email_field;
+    $fields['url'] = $url_field;
+    $fields['comment'] = $comment_field;
+    $fields['cookies'] = $cookies_field;
+    // done ordering, now return the fields:
+    return $fields;
+}
+
+// Modify Comment Field 
+function comment_field($data){
+    return '<div class="form-group"> <p class="comment-form-comment"><textarea class="form-control mb-10" placeholder="Message *" id="comment" name="comment" cols="45" rows="8" maxlength="65525" required=""></textarea></p> </div>';
+}
+add_filter('comment_form_field_comment', 'comment_field');
+
+
+// Modify Comment Field 
+function author_field($data){
+    return '<div class="comment-form-author"><input class="form-control mb-3" id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required placeholder="Enter Name" ></div>';
+}
+add_filter('comment_form_field_author', 'author_field');
+// Modify Comment Field 
+function email_field($data){
+    return '<div class="comment-form-email"><input class="form-control mb-3" id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required placeholder="Enter your email"></div>';
+}
+add_filter('comment_form_field_email', 'email_field');
+// Modify Comment Field 
+function url_field($data){
+    return '<div class="comment-form-url"><input class="form-control mb-3" id="url" name="url" type="url" value="" size="30" maxlength="200" autocomplete="url" placeholder="Subject"></div>';
+}
+add_filter('comment_form_field_url', 'url_field');
+
+
+
+
+/**
+ *
+ * pagination
+ */
+if ( !function_exists( 'ronin_post_pagination' ) ) {
+    function ronin_post_pagination(){
+        $pages = paginate_links( array( 
+            'type' => 'array',
+            'prev_text'=> '<span class="lnr lnr-chevron-left"></span>',
+            'next_text'=> '<span class="lnr lnr-chevron-right"></span>',
+        ) );
+
+        if( $pages ) {
+             echo '<ul class="pagination"><li class="page-item">';
+             foreach ( $pages as $page ) {
+                  echo "<li>$page</li>";
+             }
+             echo '</li></ul>';
+        }
+    }
+}
 

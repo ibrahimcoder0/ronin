@@ -18,3 +18,74 @@ Use it to make something cool, have fun, and share what you've learned with othe
 .feature-img img {
     width: 100%;
 }
+.form-submit .submit {
+    width: auto;
+    display: inline-block;
+    background-image: linear-gradient(to right, #8490ff 0%, #62bdfc 48%, #8490ff 100%);
+    background-size: 200% auto;
+    padding: 0px 50px;
+    color: #fff;
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 50px;
+    border-radius: 5px;
+    outline: none !important;
+    box-shadow: none !important;
+    text-align: center;
+    cursor: pointer;
+    transition: all 300ms linear 0s;
+    border: none;
+    margin-top: 20px;
+}
+
+.media.post_item .nt-thumb {
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+}
+.thumb .nt-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+
+.blog-pagination li {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #8a8a8a;
+    border: none;
+}
+.blog-pagination .pagination .current {
+    background-color: #8490ff;
+    border-color: transparent;
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+}
+
+.banner_area .banner_inner .banner_content .page_link ul li {
+    display: inline-block;
+    padding: 5px 10px;
+}
+.banner_area .banner_inner .banner_content .page_link ul {
+    padding: 0;
+}
+.banner_area .banner_inner .banner_content .page_link ul li a{
+    position: relative;
+    margin-right: 20px !important;
+}
+
+.banner_area .banner_inner .banner_content .page_link ul li a::after {
+    content: "\e87a";
+    font-family: 'Linearicons-Free';
+    font-size: 17px;
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
