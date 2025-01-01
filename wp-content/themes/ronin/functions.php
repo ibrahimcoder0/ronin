@@ -1,296 +1,200 @@
-<?php
+<?php 
 
-/**
- * ronin functions and definitions
- *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
- * @package ronin
- */
+// Require TGM Activation Plugin File
+require_once 'lib/class-tgm-plugin-activation.php';
 
-if ( !function_exists( 'ronin_setup' ) ):
-    /**
-     * Sets up theme defaults and registers support for various WordPress features.
-     *
-     * Note that this function is hooked into the after_setup_theme hook, which
-     * runs before the init hook. The init hook is too late for some features, such
-     * as indicating support for post thumbnails.
-     */
-    
-    function ronin_setup() {
-        /*
-         * Make theme available for translation.
-         * Translations can be filed in the /languages/ directory.
-         * If you're building a theme based on ronin, use a find and replace
-         * to change 'ronin' to the name of your theme in all the template files.
-         */
-        load_theme_textdomain( 'ronin', get_template_directory() . '/languages' );
+// TGM config file
+require_once 'inc/tgm-config.php';
 
-        // Add default posts and comments RSS feed links to head.
-        add_theme_support( 'automatic-feed-links' );
+// MJ breadcrumb file
+require_once 'lib/mj-wp-breadcrumb.php';
 
-        /*
-         * Let WordPress manage the document title.
-         * By adding theme support, we declare that this theme does not use a
-         * hard-coded <title> tag in the document head, and expect WordPress to
-         * provide it for us.
-         */
-        add_theme_support( 'title-tag' );
+// Codestar Fromework File
+require_once get_theme_file_path( ) .'/lib/codestar-framework-master/codestar-framework.php';
 
-        /*
-         * Enable support for Post Thumbnails on posts and pages.
-         *
-         * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-         */
-        add_theme_support( 'post-thumbnails' );
+// require codestar config file
+require_once get_theme_file_path( ) .'/inc/cf-config.php';
 
-        // This theme uses wp_nav_menu() in one location.
-        register_nav_menus( [
-            'main-menu' => esc_html__( 'Main Menu', 'ronin' ),
-            'onepage-menu-menu-01' => esc_html__( 'One Page Menu 01', 'ronin' ),
-        ] );
+// require ACF config file
+require_once get_theme_file_path( ) .'/inc/acf-config.php';
 
-        /*
-         * Switch default core markup for search form, comment form, and comments
-         * to output valid HTML5.
-         */
-        add_theme_support( 'html5', [
-            'search-form',
-            'comment-form',
-            'comment-list',
-            'gallery',
-            'caption',
-        ] );
-
-        // Set up the WordPress core custom background feature.
-        add_theme_support( 'custom-background', apply_filters( 'ronin_custom_background_args', [
-            'default-color' => 'ffffff',
-            'default-image' => '',
-        ] ) );
-
-        // Add theme support for selective refresh for widgets.
-        add_theme_support( 'customize-selective-refresh-widgets' );
-
-        //Enable custom header
-        add_theme_support( 'custom-header' );
-
-        /**
-         * Add support for core custom logo.
-         *
-         * @link https://codex.wordpress.org/Theme_Logo
-         */
-        add_theme_support( 'custom-logo', [
-            'height'      => 250,
-            'width'       => 250,
-            'flex-width'  => true,
-            'flex-height' => true,
-        ] );
-
-        /**
-         * Enable suporrt for Post Formats
-         *
-         * see: https://codex.wordpress.org/Post_Formats
-         */
-        add_theme_support( 'post-formats', [
-            'image',
-            'audio',
-            'video',
-            'gallery',
-            'quote',
-        ] );
-
-        // Add support for Block Styles.
-        add_theme_support( 'wp-block-styles' );
-
-        // Add support for full and wide align images.
-        add_theme_support( 'align-wide' );
-
-        // Add support for editor styles.
-        add_theme_support( 'editor-styles' );
-
-        // Add support for responsive embedded content.
-        add_theme_support( 'responsive-embeds' );
-
-        remove_theme_support( 'widgets-block-editor' );
-        
-        // Add support for woocommerce.
-        add_theme_support('woocommerce');
-
-        // Remove woocommerce defauly styles
-        add_filter( 'woocommerce_enqueue_styles', '__return_false' );
-
-        add_theme_support( 'wc-product-gallery-lightbox' );
-        add_theme_support( 'wc-product-gallery-slider' );
+// require widget socail file
+require_once get_theme_file_path( ) .'/inc/ronin-widget-social.php';
 
 
+// Ronin Assets Load 
+function sbportfolio_assets_load_function(){
+    wp_enqueue_style('bootstrap', get_theme_file_uri(). '/assets/css/bootstrap.css', null, '4.1.3');
+    wp_enqueue_style('linericons', get_theme_file_uri(). '/assets/vendors/linericon/style.css', null, '1.0.0');
+    wp_enqueue_style('fontawesome', get_theme_file_uri(). '/assets/css/font-awesome.min.css', null, '1.0.0');
+    wp_enqueue_style('owl-carousel', get_theme_file_uri(). '/assets/vendors/owl-carousel/owl.carousel.min.css', null, '1.0.0');
+    wp_enqueue_style('simplelightbox', get_theme_file_uri(). '/assets/vendors/lightbox/simpleLightbox.css', null, '1.0.0');
+    wp_enqueue_style('niceselect', get_theme_file_uri(). '/assets/vendors/nice-select/css/nice-select.css', null, '1.0.0');
+    wp_enqueue_style('animate', get_theme_file_uri(). '/assets/vendors/animate-css/animate.css', null, '1.0.0');
+    wp_enqueue_style('flaticon', get_theme_file_uri(). '/assets/vendors/flaticon/flaticon.css', null, '1.0.0');
+    wp_enqueue_style('style', get_theme_file_uri(). '/assets/css/style.css', null, '1.0.0');
+    wp_enqueue_style('responsive', get_theme_file_uri(). '/assets/css/responsive.css', null, '1.0.0');
+    wp_enqueue_style('sbportfoilo-style', get_stylesheet_uri(), null, time());
 
-        if ( function_exists( 'register_block_style' ) ) {
-            register_block_style(
-                'core/quote',
-                array(
-                    'name'         => 'blue-quote',
-                    'label'        => __( 'Blue Quote', 'ronin' ),
-                    'is_default'   => true,
-                    'inline_style' => '.wp-block-quote.is-style-blue-quote { color: blue; }',
-                )
-            );
-        }
-        register_block_pattern(
-            'ronin/my-awesome-pattern',
-            array(
-                'title'       => __( 'Two buttons', 'ronin' ),
-                'description' => _x( 'Two horizontal buttons, the left button is filled in, and the right button is outlined.', 'Block pattern description', 'ronin' ),
-                'content'     => "<!-- wp:buttons {\"align\":\"center\"} -->\n<div class=\"wp-block-buttons aligncenter\"><!-- wp:button {\"backgroundColor\":\"very-dark-gray\",\"borderRadius\":0} -->\n<div class=\"wp-block-button\"><a class=\"wp-block-button__link has-background has-very-dark-gray-background-color no-border-radius\">" . esc_html__( 'Button One', 'ronin' ) . "</a></div>\n<!-- /wp:button -->\n\n<!-- wp:button {\"textColor\":\"very-dark-gray\",\"borderRadius\":0,\"className\":\"is-style-outline\"} -->\n<div class=\"wp-block-button is-style-outline\"><a class=\"wp-block-button__link has-text-color has-very-dark-gray-color no-border-radius\">" . esc_html__( 'Button Two', 'ronin' ) . "</a></div>\n<!-- /wp:button --></div>\n<!-- /wp:buttons -->",
-            )
-        );
-        add_editor_style( 'custom-editor-style.css' );
+    wp_enqueue_script('popper', get_theme_file_uri(). '/assets/js/popper.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('bootstrap', get_theme_file_uri(). '/assets/js/bootstrap.min.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('stellar', get_theme_file_uri(). '/assets/js/stellar.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('lightbox', get_theme_file_uri(). '/assets/vendors/lightbox/simpleLightbox.min.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('niceselect', get_theme_file_uri(). '/assets/vendors/nice-select/js/jquery.nice-select.min.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('imageloadedpkg', get_theme_file_uri(). '/assets/vendors/isotope/imagesloaded.pkgd.min.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('isotope', get_theme_file_uri(). '/assets/vendors/isotope/isotope-min.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('owl-carousel', get_theme_file_uri(). '/assets/vendors/owl-carousel/owl.carousel.min.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('ajaxchimp', get_theme_file_uri(). '/assets/js/jquery.ajaxchimp.min.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('waypoints', get_theme_file_uri(). '/assets/vendors/counter-up/jquery.waypoints.min.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('counterup', get_theme_file_uri(). '/assets/vendors/counter-up/jquery.counterup.min.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('theme', get_theme_file_uri(). '/assets/js/theme.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('popper', get_theme_file_uri(). '/assets/js/popper.js', array('jquery'), '1.0.0', true);
+
+}
+add_action('wp_enqueue_scripts', 'sbportfolio_assets_load_function');
 
 
+if( ! function_exists( 'your_prefix_enqueue_fa5' ) ) {
+    function your_prefix_enqueue_fa5() {
+      wp_enqueue_style( 'fa5', 'https://use.fontawesome.com/releases/v5.13.0/css/all.css', array(), '5.13.0', 'all' );
+      wp_enqueue_style( 'fa5-v4-shims', 'https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css', array(), '5.13.0', 'all' );
     }
-endif;
-add_action( 'after_setup_theme', 'ronin_setup' );
+    add_action( 'wp_enqueue_scripts', 'your_prefix_enqueue_fa5' );
+  }
+  
 
-/**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function ronin_content_width() {
-    // This variable is intended to be overruled from themes.
-    // Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
-    // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-    $GLOBALS['content_width'] = apply_filters( 'ronin_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'ronin_content_width', 0 );
-
+// theme support 
+function sbportfolio_theme_support(){
+    load_theme_textdomain('sbportfolio');
+    add_theme_support('post-thumbnails');
+    add_theme_support('widgets');
+    add_theme_support('menus');
+    add_theme_support('automatic-feed-links');
+    add_theme_support('custom-background');
+    add_theme_support('custom-logo');
+    add_theme_support('post-formats', array('audio', 'video', 'quote', 'link', 'gallery'));
+    add_theme_support('title-tag');
+    add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
 
 
-/**
- * Enqueue scripts and styles.
- */
+    // Register menu 
+    register_nav_menu('primary_menu', 'Primary Menu');
 
-define( 'RONIN_THEME_DIR', get_template_directory() );
-define( 'RONIN_THEME_URI', get_template_directory_uri() );
-define( 'RONIN_THEME_CSS_DIR', RONIN_THEME_URI . '/assets/css/' );
-define( 'RONIN_THEME_JS_DIR', RONIN_THEME_URI . '/assets/js/' );
-define( 'RONIN_THEME_INC', RONIN_THEME_DIR . '/inc/' );
-
-
-
-// wp_body_open
-if ( !function_exists( 'wp_body_open' ) ) {
-    function wp_body_open() {
-        do_action( 'wp_body_open' );
+    function ronin_nav_menu_anchor($attributes){
+        $attributes['class']   = 'nav-link';
+        return $attributes;
     }
+    add_action( 'nav_menu_link_attributes', 'ronin_nav_menu_anchor');
+
+}
+add_action('after_setup_theme', 'sbportfolio_theme_support');
+
+
+
+//Comment Field Order
+add_filter( 'comment_form_fields', 'mo_comment_fields_custom_order' );
+function mo_comment_fields_custom_order( $fields ) {
+    $comment_field = $fields['comment'];
+    $author_field = $fields['author'];
+    $email_field = $fields['email'];
+    $url_field = $fields['url'];
+    $cookies_field = $fields['cookies'];
+    unset( $fields['comment'] );
+    unset( $fields['author'] );
+    unset( $fields['email'] );
+    unset( $fields['url'] );
+    unset( $fields['cookies'] );
+    // the order of fields is the order below, change it as needed:
+    $fields['author'] = $author_field;
+    $fields['email'] = $email_field;
+    $fields['url'] = $url_field;
+    $fields['comment'] = $comment_field;
+    $fields['cookies'] = $cookies_field;
+    // done ordering, now return the fields:
+    return $fields;
 }
 
-/**
- * Implement the Custom Header feature.
- */
-// require RONIN_THEME_INC . 'custom-header.php';
-
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
-require RONIN_THEME_INC . 'template-functions.php';
-
-/**
- * Custom template helper function for this theme.
- */
-require RONIN_THEME_INC . 'template-helper.php';
-
-/**
- * initialize kirki customizer class.
- */
-if ( class_exists( 'Kirki' ) ) {
-    include_once RONIN_THEME_INC . 'kirki-customizer.php';
+// Modify Comment Field 
+function comment_field($data){
+    return '<div class="form-group"> <p class="comment-form-comment"><textarea class="form-control mb-3" placeholder="Message *" id="comment" name="comment" cols="45" rows="8" maxlength="65525" required=""></textarea></p> </div>';
 }
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-    require RONIN_THEME_INC . 'jetpack.php';
-}
+add_filter('comment_form_field_comment', 'comment_field');
 
-/**
- * include ronin functions file
- */
-// require_once RONIN_THEME_INC . 'class-navwalker.php';
-require_once RONIN_THEME_INC . 'class-tgm-plugin-activation.php';
-require_once RONIN_THEME_INC . 'add_plugin.php';
-require_once RONIN_THEME_INC . '/common/breadcrumb.php';
-require_once RONIN_THEME_INC . '/common/scripts.php';
-require_once RONIN_THEME_INC . '/common/widgets.php';
-if ( function_exists('tpmeta_kick')) {
-    require_once RONIN_THEME_INC . 'mt-metabox.php';
+// Modify Comment Field 
+function author_field($data){
+    return '<div class="comment-form-author"> <input class="form-control mb-3" id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required="" placeholder="Enter Name"></div>';
 }
+add_filter('comment_form_field_author', 'author_field');
 
-if ( class_exists( 'WooCommerce' ) ) {
-    require_once RONIN_THEME_INC . '/woocommerce/mt-woocommerce.php';
+// Modify Comment Field 
+function email_field($data){
+    return '<div class="comment-form-author"> <input class="form-control mb-3" id="email" name="emial" type="email" value="" size="30" maxlength="245" autocomplete="name" required="" placeholder="Enter Email Address"></div>';
 }
+add_filter('comment_form_field_email', 'email_field');
 
-/**
- * Add a pingback url auto-discovery header for single posts, pages, or attachments.
- */
-function ronin_pingback_header() {
-    if ( is_singular() && pings_open() ) {
-        printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
+// Modify Comment Field 
+function url_field($data){
+    return '<div class="comment-form-author"> <input class="form-control mb-3" id="subject" name="subject" type="subject" value="" size="30" maxlength="245" autocomplete="name" required="" placeholder="Enter Subject"></div>';
+}
+add_filter('comment_form_field_url', 'url_field');
+
+
+
+// widget area register 
+function ronin_footer_widget_register(){
+    register_sidebar(array(
+        'id'        => 'footer_1',
+        'name'      => 'Footer 1',
+        'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'before_widget' => '<div id="%1$s" class="f_widget ab_widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<div class="f_title"><h3>',
+		'after_title'   => '</h3></div>',
+    ));
+    register_sidebar(array(
+        'id'        => 'footer_2',
+        'name'      => 'Footer 2',
+        'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'before_widget' => '<div id="%1$s" class="f_widget ab_widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<div class="f_title"><h3>',
+		'after_title'   => '</h3></div>',
+    ));
+    register_sidebar(array(
+        'id'        => 'footer_3',
+        'name'      => 'Footer 3',
+        'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'textdomain' ),
+		'before_widget' => '<div id="%1$s" class="f_widget ab_widget %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<div class="f_title"><h3>',
+		'after_title'   => '</h3></div>',
+    ));
+
+}
+add_action( 'widgets_init', 'ronin_footer_widget_register' );
+
+
+
+
+
+
+function sbcustom_css(){
+    echo '
+    <style>
+    #acf-group_67667814a363c {
+        display: none !important;
     }
+    </style>';
 }
-add_action( 'wp_head', 'ronin_pingback_header' );
+add_action('admin_head', 'sbcustom_css');
 
-/**
- * shortcode supports for removing extra p, spance etc
- *
- */
-add_filter( 'the_content', 'ronin_shortcode_extra_content_remove' );
-/**
- * Filters the content to remove any extra paragraph or break tags
- * caused by shortcodes.
- *
- * @since 1.0.0
- *
- * @param string $content  String of HTML content.
- * @return string $content Amended string of HTML content.
- */
-function ronin_shortcode_extra_content_remove( $content ) {
 
-    $array = [
-        '<p>['    => '[',
-        ']</p>'   => ']',
-        ']<br />' => ']',
-    ];
-    return strtr( $content, $array );
 
+
+// shortcode
+function call_my_shortcode(){
+    echo "tst my shortcode icb";
 }
-
-// ronin_search_filter_form
-
-
-if ( !function_exists( 'ronin_search_filter_form' ) ) {
-    function ronin_search_filter_form( $form ) {
-        $form = '
-        <div class="search-widget">
-            <form action="' . home_url( '/' ) . '">
-                <input type="text" name="s" value="' . get_search_query() . '" placeholder="' . __( 'Search for:','ronin' ) . '">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
-        </div>
-        
-        ';
-    
-            return $form;
-        }
-    }
-    add_filter( 'get_search_form', 'ronin_search_filter_form' );
+add_shortcode( 'tag_my_shortcode', 'call_my_shortcode' );
 
 
-// ronin_admin_custom_scripts
-function ronin_admin_custom_scripts() {
-    wp_enqueue_media();
-    wp_enqueue_style( 'customizer-style', get_template_directory_uri() . '/inc/css/customizer-style.css',array());
-    wp_enqueue_script( 'ronin-admin-custom', get_template_directory_uri() . '/inc/js/admin_custom.js', [ 'jquery' ], '', true );
-    wp_enqueue_script( 'ronin-admin-custom' );
-}

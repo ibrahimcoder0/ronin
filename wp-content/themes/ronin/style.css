@@ -1,91 +1,36 @@
 /*
-Theme Name: Ronin dddd
-Theme URI: http://ibrahimcoder.me/theme/ronin/
-Author: Ibrahim_Coder
+Theme Name: Ronin
+Theme URI: http://ibrahimcoder.me/
+Author: Ibrahim Coder
 Author URI: http://ibrahimcoder.me/
-Description: This is Just Theme Markup using any theme this Markup
-Version: 1.0.0
-Requires at least: 5.0
-Tested up to: 5.4
-Requires PHP: 7.0
+Description: Ronin Theme is creat by Ibrahim Coder
+Requires at least: 6.7
+Tested up to: 6.7
+Requires PHP: 7.2
+Version: 1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: ronin
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned with others.
+Tags: test seo
 */
-
-.feature-img img {
+.single-post-area .blog_details img{
     width: 100%;
 }
-.form-submit .submit {
-    width: auto;
-    display: inline-block;
-    background-image: linear-gradient(to right, #8490ff 0%, #62bdfc 48%, #8490ff 100%);
-    background-size: 200% auto;
-    padding: 0px 50px;
-    color: #fff;
-    font-family: "Roboto", sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 50px;
-    border-radius: 5px;
-    outline: none !important;
-    box-shadow: none !important;
-    text-align: center;
-    cursor: pointer;
-    transition: all 300ms linear 0s;
-    border: none;
-    margin-top: 20px;
+/* img{
+    width: 100%;
+} */
+.rating-img{
+	width: 90px !important;
 }
-
-.media.post_item .nt-thumb {
-    width: 100px;
-    height: 80px;
+.blog_post img {
+    width: 100%;
+    height: 350px;
     object-fit: cover;
 }
-.thumb .nt-thumb {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-}
-
-
-.blog-pagination li {
-    position: relative;
-    display: block;
-    padding: 0.5rem 0.75rem;
-    margin-left: -1px;
-    line-height: 1.25;
-    color: #8a8a8a;
-    border: none;
-}
-.blog-pagination .pagination .current {
-    background-color: #8490ff;
-    border-color: transparent;
-    color: #fff;
-    padding: 0.5rem 0.75rem;
-}
-
-.banner_area .banner_inner .banner_content .page_link ul li {
+.page_link ul li {
     display: inline-block;
     padding: 5px 10px;
 }
-.banner_area .banner_inner .banner_content .page_link ul {
+.page_link ul {
     padding: 0;
 }
-.banner_area .banner_inner .banner_content .page_link ul li a{
-    position: relative;
-    margin-right: 20px !important;
-}
-
-.banner_area .banner_inner .banner_content .page_link ul li a::after {
-    content: "\e87a";
-    font-family: 'Linearicons-Free';
-    font-size: 17px;
-    position: absolute;
-    right: -25px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
