@@ -17,7 +17,7 @@ $options = get_option( 'ronin_framework' ); // unique id of the framework
                 <li class="active" data-filter="*"><a href="#">All Categories</a></li>
                 <?php 
                 $arg = array(
-                    'taxonomy' => 'portfolio_cat',
+                    'taxonomy' => 'portfolio-cat',
                 );
                 $all_categories = get_categories($arg);
 
@@ -47,7 +47,7 @@ $options = get_option( 'ronin_framework' ); // unique id of the framework
                 ?>
                 <?php 
 
-                $categories = get_the_terms(get_the_ID(  ), 'portfolio_cat', '', ' ', '' );
+                $categories = get_the_terms(get_the_ID(  ), 'portfolio-cat', '', ' ', '' );
                 $cat_array = [];
                 foreach ($categories as $cat){
                 $cat_array[] = $cat -> slug;

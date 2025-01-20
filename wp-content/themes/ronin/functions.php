@@ -17,6 +17,7 @@ require_once get_theme_file_path( ) .'/inc/cf-config.php';
 
 // require ACF config file
 require_once get_theme_file_path( ) .'/inc/acf-config.php';
+require_once get_theme_file_path( ) .'/inc/acf-custom-post-type.php';
 
 // require widget socail file
 require_once get_theme_file_path( ) .'/inc/ronin-widget-social.php';
@@ -196,5 +197,4 @@ function call_my_shortcode(){
     echo "tst my shortcode icb";
 }
 add_shortcode( 'tag_my_shortcode', 'call_my_shortcode' );
-
 
